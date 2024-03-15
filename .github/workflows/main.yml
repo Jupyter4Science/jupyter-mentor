@@ -13,4 +13,3 @@ jobs:
       with:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        REPO2DOCKER_EXTRA_ARGS: --Repo2Docker.platform=linux/arm64
