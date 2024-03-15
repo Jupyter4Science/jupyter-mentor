@@ -2,7 +2,7 @@ name: Build Notebook Container
 on: [push, workflow_dispatch] # You may want to trigger this Action on other things than a push.
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: ubuntu-latest
     steps:
 
     - name: checkout files in repo
@@ -13,3 +13,4 @@ jobs:
       with:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        REPO2DOCKER_EXTRA_ARGS: --Repo2Docker.extra_build_args=platform=linux/amd64
