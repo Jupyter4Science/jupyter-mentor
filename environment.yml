@@ -1,0 +1,8 @@
+name: jupyter-mentor
+channels:
+  - fastai
+  - conda-forge
+  - defaults
+dependencies:
+  - nbdev=2.3.12
+  - jupyterlab
