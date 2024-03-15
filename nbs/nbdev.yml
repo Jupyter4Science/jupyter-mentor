@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "jupyter-mentor"
+  site-url: "https://Jupyter4Science.github.io/jupyter-mentor"
+  description: "A chatbot to coach you through learning new things in Jupyter Notebooks"
+  repo-branch: main
+  repo-url: "https://github.com/Jupyter4Science/jupyter-mentor"
