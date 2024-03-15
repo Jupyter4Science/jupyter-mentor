@@ -13,4 +13,4 @@ jobs:
       with:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        CONFIG: traitlets.config.json
+        REPO2DOCKER_EXTRA_ARGS: --Repo2Docker.platform=linux/arm64
