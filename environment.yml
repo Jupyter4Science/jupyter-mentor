@@ -6,3 +6,4 @@ channels:
 dependencies:
   - nbdev=2.3.12
   - jupyterlab
+  - jupyter-ai
