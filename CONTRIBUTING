@@ -18,4 +18,26 @@ No extra steps required. This GitHub action automatically updates the image with
 2. `cd <location_of_your_clone>` 
 3. `repo2docker --Repo2Docker.platform=linux/arm64 --image-name=brewer36/jupyter-mentor:macos ./` 
 
+
+-------------
+## Creating Conda Env ([Summary of the Documentation on Jupyter AI website](https://jupyter-ai.readthedocs.io/en/latest/users/index.html))
+
+Assuming you have conda installed...
+1. Create a new environment using version 3.11 of python with the following command: 
+``` sh
+   conda create -n jupyter-ai python=3.11
+```
+2. Go to the directory of your cloned repository and activate your envrionment:
+``` sh
+   cd path/to/your/cloned/repo
+   conda activate jupyter-ai
+```
+3. Use conda to then install JupyterLab and JupyterAI for this environment:
+``` sh
+     conda install conda-forge::jupyter-ai
+```
+4. Open jupyter lab: 
+``` sh
+    jupyter lab
+```
 Note: I probably need to make a group DockerHub account so that others can also update the image. Or at least to trigger an email when the environment configurations files have been changed and need to be updated locally. 
