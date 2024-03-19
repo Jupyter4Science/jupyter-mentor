@@ -7,3 +7,4 @@ dependencies:
   - nbdev=2.3.12
   - jupyterlab
   - jupyter-ai
+  - python=3.11 
