@@ -5,46 +5,57 @@ __all__ = ['ThirdTab']
 
 # %% ../thirdTab.ipynb 1
 import ipywidgets as widgets
-from ipywidgets import Tab, Output, Button
+from ipywidgets import VBox, HBox, HTML, Button, Label, Text, Checkbox, Accordion, FileUpload
+from IPython.display import display, clear_output
+import ipyvuetify as v
 
 
 # %% ../thirdTab.ipynb 2
-class ThirdTab(widgets.VBox):
+class ThirdTab(VBox):
     
     def __init__(self):
-        # If you forget to call the superconstructor on an extended widget
-        # you will get an AttributeError: object has no attribute '_model_id'
         super().__init__()
         
-        # Using Accordion
-        # Create accordion containing HTML content
-        self.using_acc = widgets.Accordion()
-        # self.using_acc.set_title(0, 'Using this App')
-        USING_TEXT = '''
-            In the Data tab above, you can review the dataset.
-            In the Selection tab, you can search for and download data of interest.
-            Once you've selected data, generate plots in the Visualize tab.
-            '''
-        self.using_body = widgets.HTML(USING_TEXT)
-        self.using_acc.children = (self.using_body, )
+        # File Upload button
+        self.file_upload = FileUpload(accept='', multiple=False)
+        self.file_upload_button = Button(description='Upload')
         
-        # Data Souces Accordion
-        # Create accordion containing HTML content
-        self.sources_acc = widgets.Accordion()
-       # self.sources_acc.set_title(0, 'Data Sources')
-        SOURCES_TEXT = '''
-            Land-Ocean Temperature Index
-            Global Temperature (NASA)
-            ,
-            GISS Surface Temperature Analysis (NASA)
-            
-            This site is based on data downloaded from the following site on 2020-07-14:
-            Global Mean Estimates based on Land_and Ocean Data (NASA)
-            '''
-        self.sources_body = widgets.HTML(SOURCES_TEXT)
-        self.sources_acc.children = (self.sources_body, )
+        # File viewer (hidden in accordion)
+        self.file_viewer_accordion = Accordion(children=[HTML('File viewer content')])
+        self.file_viewer_accordion.selected_index = None  # Hide the accordion content initially
         
+        # Course overview text
+        self.course_overview_label = Label('Course Overview:')
+        self.course_overview_text = Text(placeholder='Enter course overview')
+        
+        # AI Guidelines text
+        self.ai_guidelines_label = Label('AI Guidelines:')
+      
+        
+        # Binary features checkboxes
+        self.step_by_step_checkbox = Checkbox(description='Step-by-Step')
+        self.metaphor_checkbox = Checkbox(description='Metaphor')
+        self.hints_checkbox = Checkbox(description='Hints')
+        self.ai_guided_questions_checkbox = Checkbox(description='AI Guided Questions')
+        # Add more checkboxes as needed
+        
+        # Open-ended response textbox
+        self.open_ended_label = Label('Open-ended Response:')
+        self.open_ended_text = Text(placeholder='Enter open-ended response')
+
+        # Next button
         self.next_button = Button(description='Next')
         
-        self.children = (self.using_acc, self.sources_acc, self.next_button)
-     
+        # Arrange widgets vertically
+        self.children = [
+            HTML('<h2>Course Overview</h2>'),  # Heading
+            HBox([self.file_upload, self.file_upload_button]),  # File upload button
+            self.file_viewer_accordion,  # File viewer (hidden initially)
+            self.course_overview_label, self.course_overview_text,  # Course overview
+            self.ai_guidelines_label,   # AI Guidelines
+            VBox([self.step_by_step_checkbox, self.metaphor_checkbox,
+                  self.hints_checkbox, self.ai_guided_questions_checkbox]),  # Binary features checkboxes
+            self.open_ended_label, self.open_ended_text,  # Open-ended response
+            HBox([self.next_button], layout={'justify_content': 'flex-end'}), 
+        ]
+

@@ -5,46 +5,36 @@ __all__ = ['SecondTab']
 
 # %% ../secondTab.ipynb 1
 import ipywidgets as widgets
-from ipywidgets import Tab, Output, Button
+from ipywidgets import VBox, HTML, HBox, Label, Tab, Output, Button, Text
+from IPython.display import display, clear_output
+import ipyvuetify as v
 
 
 # %% ../secondTab.ipynb 2
 class SecondTab(widgets.VBox):
     
     def __init__(self):
-        # If you forget to call the superconstructor on an extended widget
-        # you will get an AttributeError: object has no attribute '_model_id'
         super().__init__()
         
-        # Using Accordion
-        # Create accordion containing HTML content
-        self.using_acc = widgets.Accordion()
-        # self.using_acc.set_title(0, 'Using this App')
-        USING_TEXT = '''
-            In the Data tab above, you can review the dataset.
-            In the Selection tab, you can search for and download data of interest.
-            Once you've selected data, generate plots in the Visualize tab.
-            '''
-        self.using_body = widgets.HTML(USING_TEXT)
-        self.using_acc.children = (self.using_body, )
+        # Username input
+        self.username_label = Label('Name:')
+        self.username_input = Text(placeholder='Enter your name')
         
-        # Data Souces Accordion
-        # Create accordion containing HTML content
-        self.sources_acc = widgets.Accordion()
-       # self.sources_acc.set_title(0, 'Data Sources')
-        SOURCES_TEXT = '''
-            Land-Ocean Temperature Index
-            Global Temperature (NASA)
-            ,
-            GISS Surface Temperature Analysis (NASA)
-            
-            This site is based on data downloaded from the following site on 2020-07-14:
-            Global Mean Estimates based on Land_and Ocean Data (NASA)
-            '''
-        self.sources_body = widgets.HTML(SOURCES_TEXT)
-        self.sources_acc.children = (self.sources_body, )
+        # Password input
+        self.key_label = Label('Educator:')
+        self.key_input = Text(placeholder='Enter Your Level', password=True)
         
+        # Next button
         self.next_button = Button(description='Next')
         
-        self.children = (self.using_acc, self.sources_acc, self.next_button)
-     
+        # Arrange labels and inputs horizontally
+        self.username_box = HBox([self.username_label, self.username_input])
+        self.key_box = HBox([self.key_label, self.key_input])
+        
+        # Arrange widgets vertically
+        self.children = [
+            HTML('<h2>User Profile</h2>'),  # Heading
+            self.username_box,       # Username label and input box
+            self.key_box,       # Password label and input box
+            HBox([self.next_button], layout={'justify_content': 'flex-end'}),  # Login button aligned to the right
+        ]
