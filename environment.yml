@@ -15,7 +15,6 @@ dependencies:
   - fastcore=1.5.28
   - jupyterlab
   - ipykernel
-  - jupyter
   - voila
   - notebook
   - sortedcontainers
