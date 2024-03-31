@@ -10,6 +10,15 @@ dependencies:
   - python=3.11
   - tiktoken
   - langchain
+  - ipywidgets
+  - pandas
+  - fastcore=1.5.28
+  - jupyterlab
+  - ipykernel
+  - jupyter
+  - voila
+  - notebook
+  - sortedcontainers
   - pip
   - pip:
     - langchain-openai
