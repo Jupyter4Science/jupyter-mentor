@@ -40,7 +40,6 @@ class StudentProfile(widgets.VBox):
         self.interests_label = Label('List your outside interests:')
         self.interests_input = Textarea(placeholder='Enter your outside interests', password=True)
 
-
         
         # Next button
         self.next_button = Button(description='Next')

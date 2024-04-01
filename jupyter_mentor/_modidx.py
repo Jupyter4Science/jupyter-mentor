@@ -27,4 +27,12 @@ d = { 'settings': { 'branch': 'main',
                                             'jupyter_mentor.file_viewer.FileViewer.__init__': ( 'file_viewer.html#fileviewer.__init__',
                                                                                                 'jupyter_mentor/file_viewer.py')},
             'jupyter_mentor.login': { 'jupyter_mentor.login.Login': ('login.html#login', 'jupyter_mentor/login.py'),
-                                      'jupyter_mentor.login.Login.__init__': ('login.html#login.__init__', 'jupyter_mentor/login.py')}}}
+                                      'jupyter_mentor.login.Login.__init__': ('login.html#login.__init__', 'jupyter_mentor/login.py')},
+            'jupyter_mentor.student_course_overview': { 'jupyter_mentor.student_course_overview.StudentCourseOverview': ( 'student_course_overview.html#studentcourseoverview',
+                                                                                                                          'jupyter_mentor/student_course_overview.py'),
+                                                        'jupyter_mentor.student_course_overview.StudentCourseOverview.__init__': ( 'student_course_overview.html#studentcourseoverview.__init__',
+                                                                                                                                   'jupyter_mentor/student_course_overview.py')},
+            'jupyter_mentor.student_profile': { 'jupyter_mentor.student_profile.StudentProfile': ( 'student_profile.html#studentprofile',
+                                                                                                   'jupyter_mentor/student_profile.py'),
+                                                'jupyter_mentor.student_profile.StudentProfile.__init__': ( 'student_profile.html#studentprofile.__init__',
+                                                                                                            'jupyter_mentor/student_profile.py')}}}
