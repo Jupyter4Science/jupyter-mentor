@@ -18,6 +18,7 @@ dependencies:
   - voila
   - notebook
   - sortedcontainers
+  - jupyter-vuetify
   - pip
   - pip:
     - langchain-openai
