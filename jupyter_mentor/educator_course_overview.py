@@ -4,6 +4,7 @@
 __all__ = ['EducatorCourseOverview']
 
 # %% ../nbs/04_educator_course_overview.ipynb 1
+from .file_viewer import FileViewer
 import ipywidgets as widgets
 from ipywidgets import VBox, HBox, HTML, Button, Label, Text, Checkbox, Accordion, FileUpload
 from IPython.display import display, clear_output
@@ -13,17 +14,15 @@ from traitlets import observe
 # %% ../nbs/04_educator_course_overview.ipynb 2
 class EducatorCourseOverview(VBox):
     
-    def __init__(self):
+    def __init__(self, file_viewer):
         super().__init__()
-        
+
         # File Upload button
         self.file_upload = FileUpload(accept='', multiple=False)
         self.file_upload_button = Button(description='Upload')
 
-        
-        # File viewer (hidden in accordion)
-        self.file_viewer_accordion = Accordion(children=[HTML('File viewer content')])
-        self.file_viewer_accordion.selected_index = None  # Hide the accordion content initially
+        # global file viewer (that has model)
+        self.file_viewer = file_viewer
         
         # Course overview text
         self.course_overview_label = Label('Course Overview:')
@@ -51,7 +50,7 @@ class EducatorCourseOverview(VBox):
         self.children = [
             HTML('<h2>Course Overview</h2>'),  # Heading
             HBox([self.file_upload, self.file_upload_button]),  # File upload button
-            self.file_viewer_accordion,  # File viewer (hidden initially)
+            self.file_viewer,
             self.course_overview_label, self.course_overview_text,  # Course overview
             self.ai_guidelines_label,   # AI Guidelines
             VBox([self.step_by_step_checkbox, self.metaphor_checkbox,
@@ -59,4 +58,3 @@ class EducatorCourseOverview(VBox):
             self.open_ended_label, self.open_ended_text,  # Open-ended response
             HBox([self.next_button], layout={'justify_content': 'flex-end'}), 
         ]
-
