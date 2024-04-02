@@ -6,7 +6,7 @@ __all__ = ['EducatorCourseOverview']
 # %% ../nbs/04_educator_course_overview.ipynb 1
 from .file_viewer import FileViewer
 import ipywidgets as widgets
-from ipywidgets import VBox, HBox, HTML, Button, Label, Text, Checkbox, Accordion, FileUpload
+from ipywidgets import VBox, HBox, HTML, Button, Label, Text, Textarea, Checkbox, Accordion, FileUpload
 from IPython.display import display, clear_output
 import ipyvuetify as v
 from traitlets import observe
@@ -26,7 +26,7 @@ class EducatorCourseOverview(VBox):
         
         # Course overview text
         self.course_overview_label = Label('Course Overview:')
-        self.course_overview_text = Text(placeholder='Enter course overview')
+        self.course_overview_text = Textarea(placeholder='Enter course overview')
         
         # AI Guidelines text
         self.ai_guidelines_label = Label('AI Guidelines:')
@@ -41,7 +41,7 @@ class EducatorCourseOverview(VBox):
         
         # Open-ended response textbox
         self.open_ended_label = Label('Open-ended Response:')
-        self.open_ended_text = Text(placeholder='Enter open-ended response')
+        self.open_ended_text = Textarea(placeholder='Enter open-ended response')
 
         # Next button
         self.next_button = Button(description='Next')
