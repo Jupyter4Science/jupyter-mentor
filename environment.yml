@@ -19,6 +19,8 @@ dependencies:
   - notebook
   - sortedcontainers
   - jupyter-vuetify
+  - pypdf
   - pip
   - pip:
     - langchain-openai
+    - unstructured # for loading markdown files 
