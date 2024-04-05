@@ -21,7 +21,7 @@ class EducatorCourseOverview(VBox):
         self.file_upload = FileUpload(accept='', multiple=False)
 
         # global file viewer (that has model)
-        self.file_viewer = file_viewer
+        #self.file_viewer = file_viewer
         
         # Course overview text
         self.course_overview_text = v.TextField(label='Course Overview:', placeholder='Enter course overview')
@@ -57,7 +57,6 @@ class EducatorCourseOverview(VBox):
         self.children = [
             self.header,  # Heading
             HBox([self.file_upload]),  # File upload button
-            self.file_viewer,
             self.course_overview_text,  # Course overview
             self.ai_guidelines_label,   # AI Guidelines
             VBox([self.step_by_step_checkbox, self.metaphor_checkbox,
