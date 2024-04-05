@@ -19,14 +19,12 @@ class EducatorCourseOverview(VBox):
 
         # File Upload button
         self.file_upload = FileUpload(accept='', multiple=False)
-        self.file_upload_button = Button(description='Upload')
 
         # global file viewer (that has model)
         self.file_viewer = file_viewer
         
         # Course overview text
-        self.course_overview_label = Label('Course Overview:')
-        self.course_overview_text = Textarea(placeholder='Enter course overview')
+        self.course_overview_text = v.TextField(label='Course Overview:', placeholder='Enter course overview')
         
         # AI Guidelines text
         self.ai_guidelines_label = Label('AI Guidelines:')
@@ -40,21 +38,30 @@ class EducatorCourseOverview(VBox):
         
         
         # Open-ended response textbox
-        self.open_ended_label = Label('Open-ended Response:')
-        self.open_ended_text = Textarea(placeholder='Enter open-ended response')
+        self.open_ended_text = v.TextField(label='Open-ended Response:', placeholder='Enter open-ended query')
 
         # Next button
         self.next_button = Button(description='Next')
+
+        #Header
+        self.header = v.Container(children=[
+            v.Html(
+                tag='h1',
+                attributes={'title': 'a title'},
+                children=['Educator Course Overview']
+            )
+        ])
+
         
         # Arrange widgets vertically
         self.children = [
-            HTML('<h2>Course Overview</h2>'),  # Heading
-            HBox([self.file_upload, self.file_upload_button]),  # File upload button
+            self.header,  # Heading
+            HBox([self.file_upload]),  # File upload button
             self.file_viewer,
-            self.course_overview_label, self.course_overview_text,  # Course overview
+            self.course_overview_text,  # Course overview
             self.ai_guidelines_label,   # AI Guidelines
             VBox([self.step_by_step_checkbox, self.metaphor_checkbox,
                   self.hints_checkbox, self.ai_guided_questions_checkbox]),  # Binary features checkboxes
-            self.open_ended_label, self.open_ended_text,  # Open-ended response
+            self.open_ended_text,  # Open-ended response
             HBox([self.next_button], layout={'justify_content': 'flex-end'}), 
         ]
