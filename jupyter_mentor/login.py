@@ -9,7 +9,6 @@ from ipywidgets import VBox, HTML, HBox, Label, Tab, Output, Button, Text
 from IPython.display import display, clear_output
 import ipyvuetify as v
 
-
 # %% ../nbs/01_login.ipynb 3
 class Login(VBox):
     
@@ -38,4 +37,3 @@ class Login(VBox):
             self.key_box,       # Password label and input box
             HBox([self.login_button], layout={'justify_content': 'flex-end'}),  # Login button aligned to the right
         ]
-
