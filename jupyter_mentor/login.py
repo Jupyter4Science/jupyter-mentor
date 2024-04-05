@@ -17,25 +17,28 @@ class Login(VBox):
         super().__init__()
         
         # Username input
-        self.username_label = Label('Username:')
-        self.username_input = Text(placeholder='Enter username')
+        self.username_input = v.TextField(label='Username:', placeholder='Enter username')
         
-        # Password input
-        self.key_label = Label('API Key:')
-        self.key_input = Text(placeholder='Enter API key', password=True)
+        # Password input   
+        self.key_input = v.TextField(label='API Key:', placeholder='Enter API key')
         
         # Login button
         self.login_button = Button(description='Login')
-        
-        # Arrange labels and inputs horizontally
-        self.username_box = HBox([self.username_label, self.username_input])
-        self.key_box = HBox([self.key_label, self.key_input])
+
+        #Header
+        self.header = v.Container(children=[
+            v.Html(
+                tag='h1',
+                attributes={'title': 'a title'},
+                children=['Log In']
+            )
+        ])
+
         
         # Arrange widgets vertically
         self.children = [
-            HTML('<h2>Login</h2>'),  # Heading
-            self.username_box,       # Username label and input box
-            self.key_box,       # Password label and input box
+            self.header,  # Heading
+            self.username_input,       # Username label and input box
+            self.key_input,       # Password label and input box
             HBox([self.login_button], layout={'justify_content': 'flex-end'}),  # Login button aligned to the right
         ]
-

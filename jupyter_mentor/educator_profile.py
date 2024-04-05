@@ -5,6 +5,7 @@ __all__ = ['EducatorProfileView']
 
 # %% ../nbs/04_educator_profile.ipynb 1
 from ipywidgets import VBox, HBox, HTML, Text, Button, Label
+import ipyvuetify as v
 
 # %% ../nbs/04_educator_profile.ipynb 2
 class EducatorProfileView(VBox):
@@ -13,24 +14,31 @@ class EducatorProfileView(VBox):
         super().__init__()
 
         # Username input
-        self.username_label = Label('Name:')
-        self.username_input = Text(placeholder='Enter your name')
+    
+        self.username_input = v.TextField(label='Name:', placeholder='Enter your first and last name')
 
-        # Password input
-        self.key_label = Label('Educator:')
-        self.key_input = Text(placeholder='Enter Your Level', password=True)
+        # Eductor Level input
+        self.key_input = v.Select(
+    label='Educator Level',
+    items=['Elementary School', 'Middle School', 'High School', 'College'])
 
-        # Next button
+         # Next button
         self.next_button = Button(description='Next')
 
-        # Arrange labels and inputs horizontally
-        self.username_box = HBox([self.username_label, self.username_input])
-        self.key_box = HBox([self.key_label, self.key_input])
+         #Header
+        self.header = v.Container(children=[
+            v.Html(
+                tag='h1',
+                attributes={'title': 'a title'},
+                children=['Educator User Profile']
+            )
+        ])
+
 
         # Arrange widgets vertically
         self.children = [
-            HTML('<h2>User Profile</h2>'),  # Heading
-            self.username_box,       # Username label and input box
-            self.key_box,       # Password label and input box
+            self.header,  # Heading
+            self.username_input,       # Username label and input box
+            self.key_input,       # Password label and input box
             HBox([self.next_button], layout={'justify_content': 'flex-end'}),  # Login button aligned to the right
         ]

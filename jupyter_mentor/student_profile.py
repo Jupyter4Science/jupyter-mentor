@@ -17,49 +17,51 @@ class StudentProfile(widgets.VBox):
 
         
         # Username input
-        self.username_label = Label('Name/ID:')
-        self.username_input = Text(placeholder='Enter your name')
+        self.username_input = v.TextField(label='Name:', placeholder='Enter username')
+
         
         # School input
-        self.school_label = Label('School/College:')
-        self.school_input = Text(placeholder='Enter Your School', password=True)
+        self.school_input = v.TextField(label='School:', placeholder='Enter your school')
 
         # Year input
-        self.year_label = Label('Enter your Grade Level:')
         self.year_input = v.Select(clearable=True, label='Grade Level', items=['Freshman', 'Sophomore', 'Junior', 'Senior'], value='')
 
         # Major input
-        self.major_label = Label('Major:')
-        self.major_input = Text(placeholder='Enter Your Major', password=True)
+        self.major_input = v.TextField(label='Major:', placeholder='Enter your major')
 
         # Minors/Certificates input
-        self.minor_label = Label('Minors/Certificates:')
-        self.minor_input = Text(placeholder='Enter Your Minors and/or Certificates', password=True)
+        self.minor_input = v.TextField(label='Minors/Certificates:', placeholder='Enter your minors and/or certificates')
 
         # Interests input
-        self.interests_label = Label('List your outside interests:')
-        self.interests_input = Textarea(placeholder='Enter your outside interests', password=True)
+        self.interests_input = v.TextField(label='Outside Interests:', placeholder='Enter your outside interests')
 
         
+   
         # Next button
         self.next_button = Button(description='Next')
-        
-        # Arrange labels and inputs horizontally
-        self.username_box = HBox([self.username_label, self.username_input])
-        self.school_box = HBox([self.school_label, self.school_input])
-        self.year_box = HBox([self.year_label, self.year_input])
-        self.major_box = HBox([self.major_label, self.major_input])
-        self.minor_box = HBox([self.minor_label, self.minor_input])
-        self.interests_box = HBox([self.interests_label, self.interests_input])
-        
-        # Arrange widgets vertically
+
+
+        #Header
+        self.header = v.Container(children=[
+            v.Html(
+                tag='h1',
+                attributes={'title': 'a title'},
+                children=['Student Profile']
+            ),
+
+            v.Icon(children=['mdi-account'])
+
+
+        ])
+
+   # Arrange widgets vertically
         self.children = [
-            HTML('<h2>Student User Profile</h2>'),  # Heading
-            self.username_box,       # Username label and input box
-            self.school_box,       # Password label and input box
-            self.year_box,
-            self.major_box,
-            self.minor_box,
-            self.interests_box,
+            self.header, # Heading 
+            self.username_input,       # Username label and input box
+            self.school_input,       # Password label and input box
+            self.year_input,
+            self.major_input,
+            self.minor_input,
+            self.interests_input,
             HBox([self.next_button], layout={'justify_content': 'flex-end'}),  # Login button aligned to the right
         ]
