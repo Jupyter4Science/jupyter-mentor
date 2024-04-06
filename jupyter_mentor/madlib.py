@@ -7,38 +7,75 @@ __all__ = ['MadLibModel', 'MadLibView']
 import ipywidgets as widgets
 import traitlets
 from ipywidgets import Textarea, Text, Layout, HBox, Stack, Layout
+from functools import partial
 from traitlets import HasTraits
 import os
+from .llm import LLM
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.prompts.chat import (
+    ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    SystemMessagePromptTemplate,
+)
 
-# %% ../nbs/05_madlib.ipynb 2
-class MadLibModel(object):
+# %% ../nbs/05_madlib.ipynb 3
+class MadLibModel(HasTraits):
 
-    def __init__(self, description, variables, template, **kwargs):
-        
-        self.description = description
+    bot_identity = traitlets.Unicode()
+    human_identity = traitlets.Unicode()
+    bot_template = traitlets.Unicode()
+
+    def __init__(self, name, descriptions, placeholders, variables, template, **kwargs):      
+        self.name = name
+        self.descriptions = descriptions
+        self.placeholders = placeholders
         # two ways to save variables... 
-        for key, value in variables.items(): # ... as attributes
-            setattr(self, key, value)
-        self.variables = variables # ...or as a dictionary, ex. { 'input_text': 'value' }  
-        self.template = template # string: '{input_text}'
+        self.variables = variables
+        self.values = ['' for i in range(len(variables))]
+        #for key, value in variables.items(): # ... as attributes
+        #    setattr(self, key, value)
+        #self.variables = variables # ...or as a dictionary, ex. { 'input_text': 'value' }  
+        self.human_template = template # string: '{input_text}'
 
-
-# %% ../nbs/05_madlib.ipynb 5
-class MadLibView(HBox):
+        #self.observe(self, 'bot_identity', 'change')
+        self.observe(self.update_bot_identity, ('bot_identity'), 'change')
+        self.observe(self.update_bot_template, ('bot_template'), 'change')
+        self.observe(self.update_human_identity, 'human_identity', 'change')
     
+    def update_bot_identity(self, change):
+        self.bot_message_prompt = SystemMessagePromptTemplate.from_template("\n\n".join([change['new'], self.bot_template]))
+
+    def update_bot_template(self, change):
+        self.bot_message_prompt = SystemMessagePromptTemplate.from_template("\n\n".join([self.bot_identity, change['new'],]))
+    
+    def update_human_identity(self, change):
+        self.human_message_prompt = HumanMessagePromptTemplate.from_template("\n\n".join([change['new'], self.human_template]))
+
+# %% ../nbs/05_madlib.ipynb 7
+class MadLibView(HBox):
+
+    # we could pass in a button instead of creating a whole bunch oof them
     def __init__(self, model, **kwargs):
         super().__init__()
         
         self.model = model
-        self.variables = {}
-        for i, (key, value) in enumerate(self.model.variables.items()):
-            text = Text(description=self.model.description, style={'description_width': 'initial'})
-            self.variables[key] = text
+        self.variables = []
+        
+        for i in range(len(self.model.variables)):
+            text = Text(
+                description = self.model.descriptions[i],
+                placeholder = self.model.placeholders[i],
+                style={'description_width': 'initial'}
+            )
+            text.observe(partial(self.observe_value_change, i), 'value', 'change')
+            self.variables.append(text)
+        
+        self.children = self.variables
 
-        self.submit_button = widgets.Button(
-            value=False,
-            disabled=False,
-            button_style='success',
-            icon='arrow-circle-right' 
-        )
-        self.children = list(self.variables.values()) 
+        # Create a new function with arg1 preset to 10
+        #partial_function1 = partial(my_function, 10)
+
+    def observe_value_change(self, i, change):
+        self.model.values[i] = change['new']
+        
