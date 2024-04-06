@@ -56,14 +56,15 @@ class ChatBotModel(FileModel):
         kwargs = {key:value for key, value in zip(keys,values)}
         prompt = chat_prompt.format_prompt( **kwargs )
         bot = self.llm.invoke(prompt).content
-        user = "\n".join([desc + ' ' + val for desc, val in zip(self.madlib_models[self.selected_index].descriptions, self.madlib_models[self.selected_index].values)])
+        interm= [desc + ' ' + val for desc, val in zip(self.madlib_models[self.selected_index].descriptions, self.madlib_models[self.selected_index].values)]
+        user = "\n".join(interm)
         return (user, bot)
         
     def prompt_with_kwargs(self, kwargs):
         ret = self.llm.invoke(self.chat_prompt.format_prompt(**kwargs))
         return ret.content
 
-# %% ../nbs/06_chatbot.ipynb 8
+# %% ../nbs/06_chatbot.ipynb 9
 class ChatBotView(widgets.VBox):
     """ This view also exists in 04_chatbot, but wea
     are overwriting it here
@@ -94,7 +95,7 @@ class ChatBotView(widgets.VBox):
         self.hbox.children = (self.stack, self.submit_button)
         self.children = (self.chat, self.radio_buttons, self.hbox ) 
 
-# %% ../nbs/06_chatbot.ipynb 10
+# %% ../nbs/06_chatbot.ipynb 11
 class ChatBot(ChatBotView):
     """ This view also exists in 04_chatbot, but wea
     are overwriting it here
@@ -122,9 +123,9 @@ class ChatBot(ChatBotView):
         self.submit_button.on_click(self.on_click)
 
     def on_click(self, change):
-        for child in self.stack.children[self.selected_index].children:
-            child.value = ''
         user, bot = self.model.prompt()
         self.chat.value = "USER: " + user + '\n\n' + "CHATBOT: " + bot + '\n\n'
         self.selected_index = 0
+        for child in self.stack.children[self.selected_index].children:
+            child.value = ''
 

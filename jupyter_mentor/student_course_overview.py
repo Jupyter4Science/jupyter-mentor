@@ -25,6 +25,7 @@ class FileDownloader(widgets.VBox):
             children=["Download All"]
         )
         self.children = [self.file_chooser, self.download_button]
+		
 
 # %% ../nbs/14_student_course_overview.ipynb 3
 class StudentCourseOverview(VBox):

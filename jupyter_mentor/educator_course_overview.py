@@ -4,6 +4,7 @@
 __all__ = ['EducatorCourseOverview']
 
 # %% ../nbs/04_educator_course_overview.ipynb 1
+from .llm import FileModel
 from .file_viewer import FileViewer
 import ipywidgets as widgets
 from ipywidgets import VBox, HBox, HTML, Button, Label, Text, Textarea, Checkbox, Accordion, FileUpload
@@ -11,10 +12,10 @@ from IPython.display import display, clear_output
 import ipyvuetify as v
 from traitlets import observe
 
-# %% ../nbs/04_educator_course_overview.ipynb 2
+# %% ../nbs/04_educator_course_overview.ipynb 3
 class EducatorCourseOverview(VBox):
     
-    def __init__(self, file_viewer):
+    def __init__(self):
         super().__init__()
 
         # File Upload button
